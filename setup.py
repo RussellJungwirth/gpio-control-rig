@@ -19,12 +19,6 @@ def get_version(rel_path):
     else:
         raise RuntimeError("Unable to find version string.")
 
-# # pip install fake-rpi
-# if app.env == 'development':
-#     import FakeRPi.GPIO as GPIO
-# else:
-#     import RPi.GPIO as GPIO
-
 requirements = [
     'RPi.GPIO'
 ]

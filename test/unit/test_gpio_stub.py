@@ -1,6 +1,6 @@
 import pytest  # noqa: F401
 
-# from src.gpio_test_rig.gpio_wrapper import transform
+# from src.gpio_control_rig import gpio_wrapper
 
 
 # @pytest.mark.skip
