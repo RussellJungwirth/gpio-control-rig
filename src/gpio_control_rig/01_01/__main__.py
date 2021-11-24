@@ -1,32 +1,23 @@
 from .. import config as env
+from .. import utils
 import RPi.GPIO as GPIO
-
 import time
 
-ledPin = 11    # define ledPin
+GPIO_PIN = 11
 
-def setup():
-    GPIO.setmode(GPIO.BOARD)       # use PHYSICAL GPIO Numbering
-    GPIO.setup(ledPin, GPIO.OUT)   # set the ledPin to OUTPUT mode
-    GPIO.output(ledPin, GPIO.LOW)  # make ledPin output LOW level 
-    print ('using pin%d'%ledPin)
-
-def loop():
+@utils.gpio_wrapper
+def run():
+    GPIO.setup(GPIO_PIN, GPIO.OUT)   # set the ledPin to OUTPUT mode
+    GPIO.output(GPIO_PIN, GPIO.LOW)  # make ledPin output LOW level 
     while True:
-        GPIO.output(ledPin, GPIO.HIGH)  # make ledPin output HIGH level to turn on led
-        print ('led turned on >>>')     # print information on terminal
-        time.sleep(1)                   # Wait for 1 second
-        GPIO.output(ledPin, GPIO.LOW)   # make ledPin output LOW level to turn off led
+        GPIO.output(GPIO_PIN, GPIO.HIGH)
+        print ('led turned on >>>')
+        time.sleep(1)
+        GPIO.output(GPIO_PIN, GPIO.LOW)
         print ('led turned off <<<')
-        time.sleep(1)                   # Wait for 1 second
+        time.sleep(1)
 
-def destroy():
-    GPIO.cleanup()                      # Release all GPIO
 
-if __name__ == '__main__':    # Program entrance
-    print ('Program is starting ... \n')
-    setup()
-    try:
-        loop()
-    except KeyboardInterrupt:   # Press ctrl-c to end the program.
-        destroy()
+
+if __name__ == '__main__':
+    run()
