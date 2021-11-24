@@ -1,4 +1,4 @@
-
+#!_venv/bin/python3
 from setuptools import setup, find_packages
 import os
 import os.path
@@ -29,18 +29,6 @@ requirements = [
     'RPi.GPIO'
 ]
 
-test_requirements = [
-    'pytest-cov',
-    'pytest-timeout',
-    'pytest-integration',
-    'flake8',
-    'pep8-naming',
-    'autopep8',
-    'ptvsd==5.0.0a12',
-    'yapf',
-    'fake-rpi',
-]
-
 if __name__ == '__main__':
     setup(
         name='gpio_control_rig',
@@ -48,5 +36,6 @@ if __name__ == '__main__':
         license='None',
         package_dir={'': 'src'},
         packages=find_packages("src"),
-        description='Raspberry Pi GPIO control rig'
+        description='Raspberry Pi GPIO control rig',
+        install_requires=requirements
     )

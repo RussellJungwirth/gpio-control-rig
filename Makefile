@@ -30,8 +30,8 @@ test-setup:
 	@python3 -m venv ${VENV_DIR}
 	@echo "installing test-requirements"
 	@${VENV_DIR}/bin/pip3 install -qq --upgrade pip;
-	@# ${VENV_DIR}/bin/pip3 install -U -v -r test-requirements.txt;
-	@${VENV_DIR}/bin/pip3 install -U -e .[test-requirements];
+	@${VENV_DIR}/bin/pip3 install -U -v -r test-requirements.txt;
+
 
 setup:
 	@# remove old venv if it exists
@@ -44,14 +44,8 @@ setup:
 	@python3 -m venv ${VENV_DIR}
 	@echo "installing requirements"
 	@${VENV_DIR}/bin/pip3 install -qq --upgrade pip;
-	@# ${VENV_DIR}/bin/pip3 install -U -v -r requirements.txt;
 	@${VENV_DIR}/bin/pip3 install -U -e .[requirements];
 
-.enforce-setup: # checks if venv exists, or creates it and installs packages
-	@if [ ! -d "${VENV_DIR}" ]; then \
-		echo "venv missing, running setup"; \
-		make setup; \
-	fi
 
 .enforce-test-setup: # checks if venv exists, or creates it and installs packages
 	@if [ ! -d "${VENV_DIR}" ]; then \

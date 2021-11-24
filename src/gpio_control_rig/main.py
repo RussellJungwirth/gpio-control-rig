@@ -1,5 +1,5 @@
 import logging
-from . import config # , utils, reader, writer
+from . import config  # , utils, reader, writer
 
 
 logger = logging.getLogger(__name__)
@@ -13,6 +13,6 @@ def main():
 
     logger = logging.getLogger(__name__)
     logger.setLevel(config.LOG_LEVEL)
-    logger.info(f"start package from main")
+    logger.info("start package from main")
 
-    logger.info(f"end package from main")
+    logger.info("end package from main")
