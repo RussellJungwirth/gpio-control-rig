@@ -10,7 +10,7 @@ BUTTON_PIN = 12
 def run():
     states = [
         {"channel": LED_PIN, "state": GPIO.OUT},
-        {"channel": BUTTON_PIN, "state": GPIO.IN, "pull_up_down": GPIO.PUD_UP},
+        {"channel": BUTTON_PIN, "state": GPIO.IN, "initial": 0, "pull_up_down": GPIO.PUD_UP},
     ]
     for state in states:
         GPIO.setup(**state)
