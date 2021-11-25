@@ -15,7 +15,7 @@ def button_handler(channel):
         print('led turned on >>>')
         GPIO.output(LED_PIN, GPIO.HIGH)
     else:
-        print('led turned on >>>')
+        print('led turned off >>>')
         GPIO.output(LED_PIN, GPIO.LOW)
 
 
