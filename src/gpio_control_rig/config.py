@@ -11,8 +11,7 @@ DEBUG_FLAG = str_to_bool(os.getenv('DEBUG_FLAG', '0'))
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'prod').lower()
 
 
-
 if ENVIRONMENT == 'dev':
     import fake_rpi
-    sys.modules['RPi'] = fake_rpi.RPi     # Fake RPi
-    sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO # Fake GPIO
+    sys.modules['RPi'] = fake_rpi.RPi  # Fake RPi
+    sys.modules['RPi.GPIO'] = fake_rpi.RPi.GPIO  # Fake GPIO
