@@ -8,9 +8,9 @@ BUTTON_PIN = 12
 LAST_STATE = False
 
 
-
 class ButtonState:
     last_state = False
+
     def button_handler(self, channel):
         self.LAST_STATE = not self.LAST_STATE
         if self.LAST_STATE:
