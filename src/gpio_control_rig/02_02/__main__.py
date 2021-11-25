@@ -12,8 +12,8 @@ class ButtonState:
     last_state = False
 
     def button_handler(self, channel):
-        self.LAST_STATE = not self.LAST_STATE
-        if self.LAST_STATE:
+        self.last_state = not self.last_state
+        if self.last_state:
             print('led turned on >>>')
             GPIO.output(LED_PIN, GPIO.HIGH)
         else:
