@@ -8,11 +8,7 @@ LED_PIN = 11
 
 @utils.gpio_wrapper
 def run():
-    states = [
-        {"channel": LED_PIN, "state": GPIO.OUT},
-    ]
-    for state in states:
-        GPIO.setup(**state)   # set the ledPin to OUTPUT mode
+    GPIO.setup(LED_PIN, GPIO.OUT)   # set the ledPin to OUTPUT mode
     GPIO.output(LED_PIN, GPIO.LOW)  # make ledPin output LOW level
     while True:
         GPIO.output(LED_PIN, GPIO.HIGH)

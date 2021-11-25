@@ -8,12 +8,8 @@ BUTTON_PIN = 12
 
 @utils.gpio_wrapper
 def run():
-    states = [
-        {"channel": LED_PIN, "state": GPIO.OUT},
-        {"channel": BUTTON_PIN, "state": GPIO.IN, "initial": 0, "pull_up_down": GPIO.PUD_UP},
-    ]
-    for state in states:
-        GPIO.setup(**state)
+    GPIO.setup(LED_PIN, GPIO.OUT)
+    GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     while True:
         if GPIO.input(BUTTON_PIN) == GPIO.LOW:
             GPIO.output(LED_PIN, GPIO.HIGH)
