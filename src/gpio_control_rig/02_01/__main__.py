@@ -10,13 +10,18 @@ BUTTON_PIN = 12
 def run():
     GPIO.setup(LED_PIN, GPIO.OUT)
     GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    last_state = 0
     while True:
         if GPIO.input(BUTTON_PIN) == GPIO.LOW:
             GPIO.output(LED_PIN, GPIO.HIGH)
-            print('led turned on >>>')
+            if last_state == 0:
+                print('led turned on >>>')
+            last_state = 1
         else:
             GPIO.output(LED_PIN, GPIO.LOW)
-            print('led turned off <<<')
+            if last_state == 1:
+                print('led turned off <<<')
+            last_state = 0
 
 
 if __name__ == '__main__':
