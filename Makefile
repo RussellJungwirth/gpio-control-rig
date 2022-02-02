@@ -28,22 +28,10 @@ clean:
 	@rm -rf _venv test-output.log coverage .coverage
 
 setup:
-	@# remove old venv if it exists
-	@if [ -d "${VENV_DIR}" ]; then \
-		echo "removing existing virutal env found in ${VENV_DIR}/"; \
-		rm -rf "${VENV_DIR}"; \
-	fi
-	@echo "creating new virtual env at ${VENV_DIR}/"
 	@python3 -m venv ${VENV_DIR}
 	@echo "installing requirements"
 	@${VENV_DIR}/bin/pip3 install -qq --upgrade pip;
 	@${VENV_DIR}/bin/python3 setup.py install ${SETUP_SWITCH};
-
-.enforce-test-setup: # checks if venv exists, or creates it and installs packages
-	@if [ ! -d "${VENV_DIR}" ]; then \
-		echo "venv missing, running setup"; \
-		make test-setup; \
-	fi
 
 .check-env: # attempts to load .env file and then verifies for required env vars
 	@. ci/check_env.sh

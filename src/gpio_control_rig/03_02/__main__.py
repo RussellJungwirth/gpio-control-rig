@@ -16,7 +16,7 @@ LED_PINS = [
     "J8:24",
 ]
 
-INTERVAL = 0.2
+INTERVAL = 0.3
 LEDS = gpiozero.LEDBoard(*LED_PINS, active_high=False)
 
 def toggle_pin(pin_index):
@@ -28,10 +28,11 @@ def toggle_pin(pin_index):
 
 @utils.gpiozero_wrapper
 def run():
-    led_indexes = list(range(0, len(LED_PINS) - 1))
+    led_indexes = list(range(0, len(LED_PINS)))
+    led_reverse = reversed(list(range(1, len(LED_PINS) - 1)))
     while True:
         [toggle_pin(pin) for pin in led_indexes]
-        [toggle_pin(pin) for pin in reversed(led_indexes)]
+        [toggle_pin(pin) for pin in led_reverse]
 
 
 if __name__ == '__main__':
