@@ -29,7 +29,6 @@ def toggle_pin(pin_index):
 @utils.gpiozero_wrapper
 def run():
     led_indexes = list(range(0, len(LED_PINS)))
-    led_reverse = reversed(list(range(1, len(LED_PINS) - 1)))
     while True:
         [toggle_pin(pin) for pin in led_indexes]
         [toggle_pin(pin) for pin in reversed(led_indexes[1:-1])]

@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO # noqa: N814
 
 LED_PINS = [11, 12, 13, 15, 16, 18, 22, 3, 5, 24]
 
-INTERVAL = 0.2
+INTERVAL = 0.1
 
 def toggle_pin(pin):
     GPIO.output(pin, GPIO.LOW)
@@ -17,7 +17,7 @@ def run():
     GPIO.output(LED_PINS, GPIO.HIGH)
     while True:
         [toggle_pin(pin) for pin in LED_PINS]
-        [toggle_pin(pin) for pin in reversed(LED_PINS)]
+        [toggle_pin(pin) for pin in reversed(LED_PINS[1:-1])]
 
 
 if __name__ == '__main__':
