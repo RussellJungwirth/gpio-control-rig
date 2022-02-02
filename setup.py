@@ -24,7 +24,8 @@ requirements = [
     'wheel',
     'RPi.GPIO',
     'gpiozero',
-    'numpy<=1.21.5',
+    'numpy<=1.21.4',
+    'cython',
 ]
 
 if __name__ == '__main__':
