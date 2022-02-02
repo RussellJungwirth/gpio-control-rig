@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 import os
 import os.path
 import codecs
+import sys
 
 
 def read(rel_path):
@@ -20,10 +21,25 @@ def get_version(rel_path):
         raise RuntimeError("Unable to find version string.")
 
 requirements = [
-    'RPi.GPIO'
+    'wheel',
+    'RPi.GPIO',
+    'gpiozero',
+    'numpy<=1.21.5',
 ]
 
 if __name__ == '__main__':
+    test_release = False
+    if "--test-release" in sys.argv:
+        test_release = True
+        sys.argv.remove("--test-release")
+
+    final_requirements = []
+    for req in requirements:
+        if test_release and req == 'RPi.GPIO':
+            final_requirements.append('fake-rpi')
+        else:
+            final_requirements.append(req)
+    print(f"final requirements {final_requirements}")
     setup(
         name='gpio_control_rig',
         version=get_version("src/gpio_control_rig/__init__.py"),
@@ -31,5 +47,5 @@ if __name__ == '__main__':
         package_dir={'': 'src'},
         packages=find_packages("src"),
         description='Raspberry Pi GPIO control rig',
-        install_requires=requirements
+        install_requires=final_requirements,
     )

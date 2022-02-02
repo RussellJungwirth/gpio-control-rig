@@ -1,7 +1,8 @@
 import random
 import string
 import RPi.GPIO as gpio  # noqa: N813
-
+import gpiozero
+from . import config
 
 def random_string(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -21,4 +22,15 @@ def gpio_wrapper(func):
         finally:
             gpio.cleanup()
             print("cleanup called")
+    return wrapper
+
+
+def gpiozero_wrapper(func):
+    def wrapper():
+        if config.ENVIRONMENT == 'dev':
+            gpiozero.Device.pin_factory = gpiozero.pins.mock.MockFactory()
+        try:
+            func()
+        except KeyboardInterrupt:
+            print("keyboard interrupt")
     return wrapper
