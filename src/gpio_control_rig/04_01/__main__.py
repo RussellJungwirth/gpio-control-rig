@@ -30,8 +30,7 @@ def run():
     while True:
         for level in pwm_states:
             pwm.set(level)
-            if level % STATUS_INTERVAL == 0:
-                print(f"pwm level {level}")
+            if level % STATUS_INTERVAL == 0: print(f"pwm level {level}")
             time.sleep(PWM_INTERVAL)
         print("pause")
         time.sleep(PAUSE_INTERVAL)
