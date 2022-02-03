@@ -33,10 +33,8 @@ def run():
             if level % STATUS_INTERVAL == 0:
                 print(f"pwm level {level}")
             time.sleep(PWM_INTERVAL)
-        print("pause start")
+        print("pause")
         time.sleep(PAUSE_INTERVAL)
-        print("pause stop")
-        increase = not increase
         pwm_states.reverse()
 
 if __name__ == '__main__':
