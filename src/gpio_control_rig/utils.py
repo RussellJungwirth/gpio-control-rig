@@ -18,8 +18,8 @@ def hook_handler(func):
         return func()
 
 
-def gpio_wrapper(func, start_hook=None, stop_hook=None):
-    def wrapper():
+def gpio_wrapper(func):
+    def wrapper(start_hook=None, stop_hook=None):
         gpio.setmode(gpio.BOARD)
         try:
             hook_handler(start_hook)
@@ -33,8 +33,8 @@ def gpio_wrapper(func, start_hook=None, stop_hook=None):
     return wrapper
 
 
-def gpiozero_wrapper(func, start_hook=None, stop_hook=None):
-    def wrapper():
+def gpiozero_wrapper(func):
+    def wrapper(start_hook=None, stop_hook=None):
         if config.ENVIRONMENT == 'dev':
             gpiozero.Device.pin_factory = gpiozero.pins.mock.MockFactory()
         try:
