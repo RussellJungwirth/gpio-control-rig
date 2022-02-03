@@ -18,7 +18,9 @@ class RgbLed:
             self.states[index].start(self.initial_value)
 
     def teardown(self):
-        [state.stop() for state in self.states]
+        for state in self.states:
+            if state:
+                state.stop()
 
     def set(self, values):
         for x in range(len(values)):
