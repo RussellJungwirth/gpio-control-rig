@@ -34,15 +34,16 @@ def gpio_wrapper(func):
     return wrapper
 
 
-def gpiozero_wrapper(*args, **kwargs):
-    def wrapper(func):
+def gpiozero_wrapper(func):
+    def wrapper():
         if config.ENVIRONMENT == 'dev':
             gpiozero.Device.pin_factory = gpiozero.pins.mock.MockFactory()
         try:
-            hook_handler(kwargs.get('start_hook'))
+            # hook_handler(kwargs.get('start_hook'))
             func()
         except KeyboardInterrupt:
             print("keyboard interrupt")
         finally:
-            hook_handler(kwargs.get('stop_hook'))
+            pass
+            # hook_handler(kwargs.get('stop_hook'))
     return wrapper
