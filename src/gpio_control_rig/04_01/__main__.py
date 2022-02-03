@@ -16,7 +16,7 @@ class PwmState:
     def set(self, value):
         self.state.ChangeDutyCycle(value)
 
-INTERVAL = 0.5
+INTERVAL = 0.1
 LED_PIN = 12
 
 @utils.gpio_wrapper
@@ -24,7 +24,7 @@ def run():
     GPIO.setup(LED_PIN, GPIO.OUT)
     GPIO.output(LED_PIN, GPIO.LOW)
     pwm = PwmState(pin=LED_PIN)
-    pwm_states = range(1, 101)
+    pwm_states = list(range(101))
     while True:
         [pwm.set(level) for level in pwm_states]
         time.sleep(INTERVAL)
