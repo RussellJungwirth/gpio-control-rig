@@ -18,18 +18,19 @@ def hook_handler(func):
         return func()
 
 
-def gpio_wrapper(*args, **kwargs):
-    def wrapper(func):
+def gpio_wrapper(func):
+    def wrapper():
+        print("gpio setup")
         gpio.setmode(gpio.BOARD)
         try:
-            hook_handler(kwargs.get('start_hook'))
+            # hook_handler(kwargs.get('start_hook'))
             func()
         except KeyboardInterrupt:
             print("keyboard interrupt")
         finally:
-            hook_handler(kwargs.get('stop_hook'))
+            # hook_handler(kwargs.get('stop_hook'))
             gpio.cleanup()
-            print("cleanup called")
+            print("gpio teardown")
     return wrapper
 
 

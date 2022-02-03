@@ -37,14 +37,14 @@ setup:
 	@. ci/check_env.sh
 
 lint: .enforce-test-setup ## verifies that code complies with spec
-	@${VENV_DIR}/bin/flake8 --ignore=E501 src
+	@${VENV_DIR}/bin/flake8 --ignore=E501 gpio_control_rig
 
 run: ## .enforce-setup .check-env  ## RELEASE=2021-summer make upload-project-release : uploads the notebook source to a databricks shared release location
 	@if [ -z "${MODULE}" ]; then \
 		echo "module variable not set.  use command MODULE='numbered_module' make run"; \
 	else \
 		echo "executing test rig ${MODULE}"; \
-		${VENV_DIR}/bin/python3 -m src.gpio_control_rig.${MODULE}; \
+		${VENV_DIR}/bin/python3 -m gpio_control_rig.${MODULE}; \
 	fi
 
 build: .enforce-test-setup lint ## creates a binary distribution wheel for the library code
