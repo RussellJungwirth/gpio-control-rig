@@ -14,34 +14,34 @@ def random_int(min=0, max=99999999):
 
 
 def hook_handler(func):
-    if isinstance(func, function):
+    if callable(func):
         return func()
 
 
-def gpio_wrapper(func):
-    def wrapper(start_hook=None, stop_hook=None):
+def gpio_wrapper(*args, **kwargs):
+    def wrapper(func):
         gpio.setmode(gpio.BOARD)
         try:
-            hook_handler(start_hook)
+            hook_handler(kwargs.get('start_hook'))
             func()
         except KeyboardInterrupt:
             print("keyboard interrupt")
         finally:
-            hook_handler(stop_hook)
+            hook_handler(kwargs.get('stop_hook'))
             gpio.cleanup()
             print("cleanup called")
     return wrapper
 
 
-def gpiozero_wrapper(func):
-    def wrapper(start_hook=None, stop_hook=None):
+def gpiozero_wrapper(*args, **kwargs):
+    def wrapper(func):
         if config.ENVIRONMENT == 'dev':
             gpiozero.Device.pin_factory = gpiozero.pins.mock.MockFactory()
         try:
-            hook_handler(start_hook)
+            hook_handler(kwargs.get('start_hook'))
             func()
         except KeyboardInterrupt:
             print("keyboard interrupt")
         finally:
-            hook_handler(stop_hook)
+            hook_handler(kwargs.get('stop_hook'))
     return wrapper

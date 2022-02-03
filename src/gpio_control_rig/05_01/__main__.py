@@ -29,7 +29,7 @@ LED_PINS = [11, 12, 13]
 
 PWM = RgbLed(pins=LED_PINS)
 
-@utils.gpio_wrapper(PWM.startup, PWM.teardown)
+@utils.gpio_wrapper(start_hook=PWM.startup, stop_hook=PWM.teardown)
 def run():
     GPIO.setup(LED_PINS, GPIO.OUT)
     GPIO.output(LED_PINS, GPIO.LOW)
