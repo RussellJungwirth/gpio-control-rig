@@ -18,6 +18,7 @@ class PwmState:
 
 PWM_INTERVAL = 0.1
 PAUSE_INTERVAL = 1
+STATUS_INTERVAL = 15
 LED_PIN = 12
 
 @utils.gpio_wrapper
@@ -29,9 +30,15 @@ def run():
     while True:
         for level in pwm_states:
             pwm.set(level)
+            if level % STATUS_INTERVAL == 0:
+                print(f"pwm level {level}")
             time.sleep(PWM_INTERVAL)
+        print("pause start")
         time.sleep(PAUSE_INTERVAL)
+        print("pause stop")
         for level in reversed(pwm_states):
+            if level % STATUS_INTERVAL == 0:
+                print(f"pwm level {level}")
             pwm.set(level)
             time.sleep(PWM_INTERVAL)
 
