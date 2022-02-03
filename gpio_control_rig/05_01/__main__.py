@@ -4,6 +4,7 @@ from .. import utils
 import RPi.GPIO as GPIO # noqa: N814
 
 
+# this class is enabled for "with"
 class RgbLed:
     states = [None, None, None]
 
@@ -35,8 +36,6 @@ class RgbLed:
 PAUSE_INTERVAL = 1
 LED_PINS = [11, 12, 13]
 
-# PWM = RgbLed(pins=LED_PINS)
-
 @utils.gpio_wrapper
 def run():
     print("gpio init")
@@ -48,7 +47,4 @@ def run():
             time.sleep(PAUSE_INTERVAL)
 
 if __name__ == '__main__':
-    print("main enter")
     run()
-    print("main exit")
-

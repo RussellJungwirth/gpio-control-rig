@@ -23,12 +23,10 @@ def gpio_wrapper(func):
         print("gpio setup")
         gpio.setmode(gpio.BOARD)
         try:
-            # hook_handler(kwargs.get('start_hook'))
             func()
         except KeyboardInterrupt:
             print("keyboard interrupt")
         finally:
-            # hook_handler(kwargs.get('stop_hook'))
             gpio.cleanup()
             print("gpio teardown")
     return wrapper
@@ -39,11 +37,9 @@ def gpiozero_wrapper(func):
         if config.ENVIRONMENT == 'dev':
             gpiozero.Device.pin_factory = gpiozero.pins.mock.MockFactory()
         try:
-            # hook_handler(kwargs.get('start_hook'))
             func()
         except KeyboardInterrupt:
             print("keyboard interrupt")
         finally:
             pass
-            # hook_handler(kwargs.get('stop_hook'))
     return wrapper
