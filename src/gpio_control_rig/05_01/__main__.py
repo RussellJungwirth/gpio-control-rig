@@ -27,15 +27,15 @@ class RgbLed:
 PAUSE_INTERVAL = 1
 LED_PINS = [11, 12, 13]
 
+PWM = RgbLed(pins=LED_PINS)
 
+@utils.gpio_wrapper(PWM.startup, PWM.teardown)
 def run():
-    pwm = RgbLed(pins=LED_PINS)
-    with utils.gpio_wrapper(start_hook=pwm.startup, stop_hook=pwm.teardown):
-        GPIO.setup(LED_PINS, GPIO.OUT)
-        GPIO.output(LED_PINS, GPIO.LOW)
-        while True:
-            pwm.set([random.randint(0, 100) for _ in range(3)])
-            time.sleep(PAUSE_INTERVAL)
+    GPIO.setup(LED_PINS, GPIO.OUT)
+    GPIO.output(LED_PINS, GPIO.LOW)
+    while True:
+        PWM.set([random.randint(0, 100) for _ in range(3)])
+        time.sleep(PAUSE_INTERVAL)
 
 if __name__ == '__main__':
     run()
