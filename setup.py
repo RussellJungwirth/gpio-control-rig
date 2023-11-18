@@ -43,7 +43,7 @@ if __name__ == '__main__':
     print(f"final requirements {final_requirements}")
     setup(
         name='gpio_control_rig',
-        version=get_version("src/gpio_control_rig/__init__.py"),
+        version=get_version("gpio_control_rig/__init__.py"),
         license='None',
         package_dir={'': 'src'},
         packages=find_packages("src"),
