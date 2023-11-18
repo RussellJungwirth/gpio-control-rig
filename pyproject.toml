@@ -7,7 +7,7 @@ readme = "README.md"
 repository = "https://github.com/RussellJungwirth/gpio-control-rig"
 keywords = []
 packages = [
-    { include = "gpio-control-rig" }
+    { include = "gpio_control_rig" }
 ]
 
 [tool.poetry.dependencies]
